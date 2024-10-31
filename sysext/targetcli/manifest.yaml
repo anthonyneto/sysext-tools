@@ -1,0 +1,7 @@
+name: targetcli
+version: "1.0.0"
+description: "Targetcli for managing iSCSI targets"
+licenses:
+  - MIT
+dependencies:
+  - targetcli
