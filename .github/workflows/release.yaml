@@ -39,7 +39,9 @@ jobs:
 
       # Build the sysext image
       - name: Build Sysext Image
-        run: ./bake_flatcar_image.sh --vendor qemu_uefi sysext/targetcli/manifest.yaml
+        run: |
+          mkdir -p flatcar-root/etc/extensions/sysext/targetcli
+          ./bake_flatcar_image.sh --vendor qemu_uefi sysext/targetcli/manifest.yaml
 
       # Create a new latest release with artifacts
       - name: Create a new latest release with artifacts
