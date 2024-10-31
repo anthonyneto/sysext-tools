@@ -3,8 +3,8 @@ name: Build and Release Systemd Sysext Images
 on:
   push:
     tags:
-      # - 'latest'
-      # - '[0-9]+'
+      - 'latest'
+      - '[0-9]+'
 
 jobs:
   build:
