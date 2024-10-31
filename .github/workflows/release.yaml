@@ -45,19 +45,8 @@ jobs:
           cd sysext/
           ./bake.sh targetcli
 
-      # Create a new latest release with artifacts
-      - name: Create a new latest release with artifacts
-        uses: softprops/action-gh-release@v2
-        with:
-          make_latest: true
-          body_path: sysext/targetcli/Release.md
-          files: |
-            output/targetcli.sysext
-            output/SHA256SUMS
-
       # Optionally, upload additional artifacts
       - name: Upload targetcli artifacts
         uses: softprops/action-gh-release@v2
         with:
-          files: |
-            output/targetcli*.raw
+          files: sysext/targetcli/targetcli.raw
