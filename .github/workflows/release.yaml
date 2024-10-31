@@ -44,6 +44,7 @@ jobs:
           cp bake.sh sysext/
           cd sysext/
           ./bake.sh targetcli
+          ls -lahR
 
       # Create a new latest release with artifacts
       - name: Create a new latest release with artifacts
@@ -57,5 +58,3 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: sysext/targetcli/targetcli.raw
-
-# hmm
