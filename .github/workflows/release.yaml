@@ -51,7 +51,7 @@ jobs:
         with:
           make_latest: true
           body_path: sysext/targetcli
-          files: targetcli.raw
+          files: sysext/targetcli/targetcli.raw
 
       # Optionally, upload additional artifacts
       - name: Upload targetcli artifacts
