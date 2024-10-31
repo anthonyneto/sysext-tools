@@ -41,7 +41,9 @@ jobs:
       - name: Build Sysext Image
         run: |
           mkdir -p flatcar-root/etc/extensions/sysext/targetcli
-          ./bake.sh targetcli:sysext/targetcli/manifest.yaml
+          cp bake.sh sysext/
+          cd sysext/
+          ./bake.sh targetcli
 
       # Create a new latest release with artifacts
       - name: Create a new latest release with artifacts
