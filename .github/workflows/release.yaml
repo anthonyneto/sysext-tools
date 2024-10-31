@@ -2,9 +2,9 @@ name: Build and Release Systemd Sysext Images
 
 on:
   push:
-    # tags:
-    #   - 'latest'
-    #   - '[0-9]+'
+    tags:
+      # - 'latest'
+      # - '[0-9]+'
 
 jobs:
   build:
@@ -13,16 +13,18 @@ jobs:
       contents: write
 
     steps:
+      # Checkout the sources
       - uses: actions/checkout@v4
-        with:
-          path: bakery
 
+      # Set up QEMU
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
 
+      # Set up Docker Buildx
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
+      # Install prerequisites
       - name: Install prerequisites
         run: |
           set -euxo pipefail
@@ -31,22 +33,28 @@ jobs:
             jq \
             squashfs-tools \
             xz-utils \
-            gawk
+            gawk \
+            bzip2 \
+            gpg
 
-      - name: Build release artifacts
+      # Build the sysext image
+      - name: Build Sysext Image
         run: |
-          pushd bakery
-          REPO=${{ github.repository }} ./bake_flatcar_image.sh sysext/targetcli/manifest.yaml
+          pushd sysext/targetcli
+          ./bake_flatcar_image.sh --fetch --install_to root:/opt/extensions/ manifest.yaml
+          popd
 
+      # Create a new latest release with artifacts
       - name: Create a new latest release with artifacts
         uses: softprops/action-gh-release@v2
         with:
           make_latest: true
-          body_path: bakery/Release.md
+          body_path: sysext/targetcli/Release.md
           files: |
             output/targetcli.sysext
             output/SHA256SUMS
 
+      # Optionally, upload additional artifacts
       - name: Upload targetcli artifacts
         uses: softprops/action-gh-release@v2
         with:
