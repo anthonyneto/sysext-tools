@@ -44,7 +44,7 @@ jobs:
           cp bake.sh sysext/
           cd sysext/
           ./bake.sh targetcli
-          ls -lahR
+          ls -lahR .
 
       # Create a new latest release with artifacts
       - name: Create a new latest release with artifacts
