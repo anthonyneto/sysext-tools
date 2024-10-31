@@ -2,9 +2,9 @@ name: Build and Release Systemd Sysext Images
 
 on:
   push:
-    tags:
-      - 'latest'
-      - '[0-9]+'
+    # tags:
+    #   - 'latest'
+    #   - '[0-9]+'
 
 jobs:
   build:
